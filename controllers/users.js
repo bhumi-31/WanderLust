@@ -33,6 +33,19 @@ module.exports.login = async(req, res) => {
     res.redirect(redirectUrl);
 }
 
+// module.exports.login = async(req, res) => {
+//     console.log("AFTER LOGIN USER:", req.user);   // <-- debug ke liye
+//     console.log("SESSION:", req.session);         // <-- debug ke liye
+    
+//     req.flash("success","Welcome back to WanderLust!");
+//     let redirectUrl = res.locals.redirectUrl || "/listings";
+
+//     // Kabhi kabhi render pr session turant save nahi hota
+//     req.session.save(() => {
+//         res.redirect(redirectUrl);
+//     });
+// }
+
 module.exports.logout = (req, res, next) => {
     req.logout((err) => {
         if(err){
