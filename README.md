@@ -2,8 +2,6 @@
 
 A feature-rich full-stack web application inspired by Airbnb, built with the MERN stack (MongoDB, Express.js, Node.js). This project implements authentication, CRUD operations, reviews, image uploads, and interactive maps for an end-to-end booking/listing experience.
 
-🚀 Live Demo
-https://wanderlust-1-90cd.onrender.com/login
 
 🌐 Project Overview
 
