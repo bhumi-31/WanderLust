@@ -16,6 +16,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const Listing = require("./models/listing.js");
+
 
 
 const listingRouter = require("./routes/listing.js");
@@ -101,15 +103,19 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 
+
+
 app.use((req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
+
 
 app.use((err, req, res, next) => {
     let {statusCode = 500, message = "Something went wrong!"} = err;
     res.status(statusCode).render("error.ejs", { message});
     // res.status(statusCode).send(message);
 });
+
 
 
 // app.get("/demouser", async(req, res) => {
@@ -124,18 +130,18 @@ app.use((err, req, res, next) => {
 
 
 
-// app.get("/testListing", async(req, res) => {
-//     let sampleListing = new Listing({
-//         title : "My New Villa",
-//         description : "By the beach",
-//         price : 1200,
-//         location : "Calangaute, Goa",
-//         country : "India"
-//     });
-//     await sampleListing.save();
-//     console.log("sample was saved");
-//     res.send("successful testing");
-// })
+app.get("/testListing", async(req, res) => {
+    let sampleListing = new Listing({
+        title : "My New Villa",
+        description : "By the beach",
+        price : 1200,
+        location : "Calangaute, Goa",
+        country : "India"
+    });
+    await sampleListing.save();
+    console.log("sample was saved");
+    res.send("successful testing");
+})
 app.listen("8080", () =>{
     console.log("server is listening to port 8080");
 })

@@ -19,16 +19,22 @@ router.route("/")
 
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-router.route("/:id")
-.get( wrapAsync(listingController.showListing)) // show route
-.put( isLoggedIn, isOwner,upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing)) //update route
-.delete( isOwner, wrapAsync(listingController.destroyListing)); // delete route
+
 
 
 
 //EDIT ROUTE
 
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
+
+// SHOW + UPDATE + DELETE
+
+router.route("/:id")
+.get( wrapAsync(listingController.showListing)) // show route
+.put( isLoggedIn, isOwner,upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing)) //update route
+.delete( isOwner, wrapAsync(listingController.destroyListing)); // delete route
+
+
 
 
 module.exports = router;
