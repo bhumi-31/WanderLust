@@ -12,21 +12,28 @@ const geocodingClient = mbxTilesets({ accessToken: mapToken });
 module.exports.index = async (req, res) => {
     try {
         const searchQuery = req.query.q;
+        const category = req.query.category;
+        console.log("Category filter:", category);
+
         // console.log("User searched for:", searchQuery);
 
-        let listings;
-        if (searchQuery) {
-            listings = await Listing.find({
-                $or: [
-                    { title: { $regex: searchQuery, $options: "i" } },
-                    { location: { $regex: searchQuery, $options: "i" } }
-                ]
-            });
-        } else {
-            listings = await Listing.find({});
+        let filters = {};
+
+        // let listings;
+        if(searchQuery){
+            filters.$or = [
+                { title: { $regex: searchQuery, $options: "i" } },
+                { location: { $regex: searchQuery, $options: "i" } }
+            ];
         }
 
-        res.render("listings/index.ejs", { listings, searchQuery });
+        if(category){
+            filters.category = category;
+        }
+
+        const listings = await Listing.find(filters);
+
+        res.render("listings/index.ejs", { listings, searchQuery , category});
     } catch (err) {
         console.error(err);
         res.status(500).send("Something went wrong!");
@@ -60,6 +67,7 @@ module.exports.createListing = async (req, res) => {
 
     let url = req.file.path;
     let filename = req.file.filename;
+    console.log(req.body.listing);
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image = { url, filename };
