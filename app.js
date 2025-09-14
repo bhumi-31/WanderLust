@@ -68,12 +68,14 @@ const sessionOptions = {
     secret : process.env.SECRET,
     // secret : "omnamahshivay",
     resave : false,
-    saveUninitialized : true,
+    saveUninitialized : false,
     cookie : {
         expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge : 7 * 24 * 60 * 60 * 1000,
         httpOnly : true,
-        // secure: process.env.NODE_ENV === "production",
+        secure: false ,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
         // samSite: "lax"
     }
 };
@@ -99,6 +101,13 @@ app.use((req, res, next) => {
     res.locals.currUser = req.user || null;
     next();
 });
+
+// app.use((req, res, next) => {
+//     console.log("Session ID:", req.sessionID);
+//     console.log("User authenticated:", req.isAuthenticated());
+//     console.log("Current user:", req.user);
+//     next();
+// });
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
