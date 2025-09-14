@@ -3,7 +3,8 @@ const mbxTilesets = require('@mapbox/mapbox-sdk/services/geocoding');
 
 
 const mapToken = process.env.MAP_TOKEN;
-// console.log('MAP_TOKEN value:', mapToken);
+console.log('Render Debug - MAP_TOKEN exists:', !!mapToken);
+console.log('Render Debug - MAP_TOKEN first 10 chars:', mapToken ? mapToken.substring(0, 10) : 'undefined');
 const geocodingClient = mbxTilesets({ accessToken: mapToken });
 
 // module.exports.index = async (req, res) => {
