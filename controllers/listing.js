@@ -1,7 +1,9 @@
 const Listing = require("../models/listing.js");
 const mbxTilesets = require('@mapbox/mapbox-sdk/services/geocoding');
 
+
 const mapToken = process.env.MAP_TOKEN;
+// console.log('MAP_TOKEN value:', mapToken);
 const geocodingClient = mbxTilesets({ accessToken: mapToken });
 
 // module.exports.index = async (req, res) => {
@@ -13,7 +15,7 @@ module.exports.index = async (req, res) => {
     try {
         const searchQuery = req.query.q;
         const category = req.query.category;
-        console.log("Category filter:", category);
+        // console.log("Category filter:", category);
 
         // console.log("User searched for:", searchQuery);
 
