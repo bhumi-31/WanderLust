@@ -57,7 +57,9 @@ module.exports.showListing = async (req, res) => {
         req.flash("error", "Listing you requested does not exist!");
         return res.redirect("/listings");
     }
-    console.log(listing);
+    // console.log(listing);
+    console.log('Controller Debug - MAP_TOKEN:', process.env.MAP_TOKEN ? 'EXISTS' : 'UNDEFINED');
+    console.log('Controller Debug - MAP_TOKEN first 10 chars:', process.env.MAP_TOKEN ? process.env.MAP_TOKEN.substring(0, 10) : 'UNDEFINED');
     res.render("listings/show.ejs", { listing , mapToken: process.env.MAP_TOKEN});
 };
 
