@@ -74,8 +74,8 @@ const sessionOptions = {
         maxAge : 7 * 24 * 60 * 60 * 1000,
         httpOnly : true,
         secure: false ,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+        // secure: process.env.NODE_ENV === "production",
+        // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
         // samSite: "lax"
     }
 };
@@ -102,12 +102,12 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use((req, res, next) => {
-//     console.log("Session ID:", req.sessionID);
-//     console.log("User authenticated:", req.isAuthenticated());
-//     console.log("Current user:", req.user);
-//     next();
-// });
+app.use((req, res, next) => {
+    console.log("Session ID:", req.sessionID);
+    console.log("User authenticated:", req.isAuthenticated());
+    console.log("Current user:", req.user);
+    next();
+});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
