@@ -88,8 +88,3 @@ Follow these steps to set up the project locally:
 
 That's it! You have successfully installed and set up the Wanderlust web project on your local machine. If you encounter any issues during the installation process, feel free to reach out for assistance. Happy traveling! 🌍✈️
 
-## 📦 Deployment
-
-The project is also deployed online. Access it here:
-
-[Live Demo Link](https://your-deployed-url.com)  
